@@ -45,8 +45,10 @@ class Database {
                 $types    = [$types];
                 $params   = array_merge($types, $values);
                 $tmpArray = [];
+
                 foreach ($params as $i => $value) {
                     $tmpArray[$i] = &$params[$i];
+                    print_r($params[$i]);
                 }
                 call_user_func_array([$stmt, 'bind_param'], $tmpArray);
             }
@@ -208,7 +210,7 @@ class Database {
      * @param $orderBy
      * @return array
      */
-    public static function getRows($table, $fields = false, $types = false, $values = false, $orderBy = false) {
+    public static function getRows($table, $fields = false, $types = false, $values = false, $join = false, $orderBy = false) {
         if ($fields === false || $types === false || $values === false) {
             $types      = null;
             $values     = null;
@@ -216,15 +218,19 @@ class Database {
         } else {
             $fieldQueries = [];
             foreach ($fields as $field) {
-                $fieldQueries[] = $field . ' = ?';
+                $fieldQueries[] = $field . ' like ?';
             }
-            $fieldQuery = implode(' AND ', $fieldQueries);
+            $fieldQuery = implode(' or ', $fieldQueries);
         }
         $orderByQuery = "";
         if ($orderBy) {
             $orderByQuery = " ORDER BY " . $orderBy;
         }
-        $query  = "SELECT * FROM " . $table . " WHERE " . $fieldQuery . $orderByQuery;
+        $joinQuery = "";
+        if ($join) {
+            $joinQuery = " " . $join;
+        }
+        $query  = "SELECT * FROM " . $table . $joinQuery . " WHERE " . $fieldQuery  . $orderByQuery;
         $result = self::executeQuery($query, $types, $values);
         if ($result['success']) {
             return self::fetch($result['stmt']);
