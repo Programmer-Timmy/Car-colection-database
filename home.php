@@ -1,4 +1,12 @@
 <?php
+if(!isset($_COOKIE['load'])){
+    setcookie("load", 100);
+
+}
+if($_POST){
+    $load = $_COOKIE['load'] + 100;
+    setcookie("load", $load);
+}
 if (isset($_GET['filter']) && isset($_GET['sortby']) && isset($_GET['orderby'])) {
     $cars = cars::loadcars($_GET['filter'], $_GET['sortby'], $_GET['orderby']);
 } else if (isset($_GET['sortby']) && isset($_GET['orderby'])) {
@@ -57,7 +65,7 @@ if (isset($_GET['filter']) && isset($_GET['sortby']) && isset($_GET['orderby']))
 
 <div class="flex-container">
     <?php
-    foreach ($cars as $car) {
+    foreach (array_slice($cars,0,$_COOKIE['load']) as $car) {
         $carosserievariant = "";
         $dubbel = "Nee";
         $orgineel = "Nee";
@@ -73,9 +81,12 @@ if (isset($_GET['filter']) && isset($_GET['sortby']) && isset($_GET['orderby']))
         echo "<div class=\"container\">
         <div class=\"img-container swiper-container\">
             <div class=\"swiper-wrapper\">
-                <div class=\"swiper-slide\"><img src=\"https://www.kwaaijongens.nl/blog/wp-content/uploads/2021/02/wordpress-foto-korrelig.png\"></div>
-                <div class=\"swiper-slide\"><img src=\"https://cdn-imgix.headout.com/tour/7064/TOUR-IMAGE/c0e9c490-b7e7-47a6-9c43-3e10e8ddc9cb-4445-dubai-img-worlds-of-adventure-tickets-08.jpeg?auto=format&w=780&h=384&q=90&fit=crop&ar=21%3A9\"></div>
-                <div class=\"swiper-slide\"><img src=\"image3.jpg\"></div>
+                <div class=\"swiper-slide\"><img src=\"img/0001%20-%20Alfa%20Romeo%2033%20Carabo%20(Concept%20Car)%20(1968)%20-%20Back.jpg\"></div>
+                <div class=\"swiper-slide\"><img src=\"img/0001%20-%20Alfa%20Romeo%2033%20Carabo%20(Concept%20Car)%20(1968)%20-%20Face%20Back.jpg\"></div>
+                <div class=\"swiper-slide\"><img src=\"img/0001%20-%20Alfa%20Romeo%2033%20Carabo%20(Concept%20Car)%20(1968)%20-%20Face%20Front.jpg\"></div>
+                <div class=\"swiper-slide\"><img src=\"img/0001%20-%20Alfa%20Romeo%2033%20Carabo%20(Concept%20Car)%20(1968)%20-%20Front%20%5BNB%5D.jpg\"></div>
+                <div class=\"swiper-slide\"><img src=\"img/0001%20-%20Alfa%20Romeo%2033%20Carabo%20(Concept%20Car)%20(1968)%20-%20Front.jpg\"></div>
+                <div class=\"swiper-slide\"><img src=\"img/0001%20-%20Alfa%20Romeo%2033%20Carabo%20(Concept%20Car)%20(1968)%20-%20Side.jpg\"></div>
             </div>
         </div>
         <div class=\"info-container\">";
@@ -172,7 +183,11 @@ if (isset($_GET['filter']) && isset($_GET['sortby']) && isset($_GET['orderby']))
         echo "</div>";
     }
     ?>
+
 </div>
+<form method="post">
+    <input type="submit" name="versuur" value="load more">
+</form>
 </body>
 <script>
     var mySwiper = new Swiper('.swiper-container', {

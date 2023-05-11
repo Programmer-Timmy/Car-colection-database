@@ -53,13 +53,13 @@ header{
     overflow: hidden;
     width: 100%;
     transition: height 1s;
-    &:hover , img:hover{
-      height: 250px;
+    &:hover{
+      height: 300px;
     }
 
     img {
       transition: height 1s;
-      height: 250px;
+      height: 300px;
       width: 100%;
       object-fit: cover;
       resize: none;
