@@ -23,9 +23,21 @@ header{
     display: flex;
     padding: 15px 0 15px 0;
     align-items: stretch;
+
+    .fa-magnifying-glass{
+      position: absolute;
+      margin: 6px 0 0 3px;
+    }
+
+    input:focus{
+      z-index: 20;
+    }
+
     input, select{
       background-color: #F0EBF0;
-      border: 0px;
+      border: 0.1px rgba(52, 51, 52, 0.6) solid;
+      border-radius: 5px;
+      margin: 0 4px 0 0
     }
   }
 }

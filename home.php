@@ -1,8 +1,9 @@
 <?php
 if(!isset($_COOKIE['load'])){
     setcookie("load", 100);
-
 }
+
+print_r($_SERVER);
 if($_POST){
     $load = $_COOKIE['load'] + 100;
     setcookie("load", $load);
@@ -40,10 +41,11 @@ if (isset($_GET['filter']) && isset($_GET['sortby']) && isset($_GET['orderby']))
 <body>
 <header>
     <ul>
-        <li>Home</li>
+        <li><a href="/">Home</a></li>
     </ul>
     <form method="get">
         <input type="text" name="filter">
+        <i class="fa-solid fa-magnifying-glass"></i>
         <select name="sortby">
             <option value="Nummer" <?php if(isset($_GET["sortby"])=="Nummer" and $_GET["sortby"]=="Nummer") {echo"selected";} ?>>Nummer</option>
             <option value="Merk" <?php if(isset($_GET["sortby"])=="Merk" and $_GET["sortby"]=="Merk") {echo"selected";} ?>>Merk</option>
