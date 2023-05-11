@@ -1,10 +1,19 @@
 <?php
-if(!isset($_GET['filter'])){
-    $cars = cars::loadcars();
-}else {
+if (isset($_GET['filter']) && isset($_GET['sortby']) && isset($_GET['orderby'])) {
+    $cars = cars::loadcars($_GET['filter'], $_GET['sortby'], $_GET['orderby']);
+} else if (isset($_GET['sortby']) && isset($_GET['orderby'])) {
+    $cars = cars::loadcars("", $_GET['sortby'], $_GET['orderby']);
+} else if (isset($_GET['filter']) && isset($_GET['orderby'])) {
+    $cars = cars::loadcars($_GET['filter'], "", $_GET['orderby']);
+} else if (isset($_GET['orderby'])) {
+    $cars = cars::loadcars("", "Nummer", $_GET['orderby']);
+} else if (isset($_GET['sortby'])) {
+    $cars = cars::loadcars("", $_GET['sortby']);
+} else if (isset($_GET['filter'])) {
     $cars = cars::loadcars($_GET['filter']);
+} else {
+    $cars = cars::loadcars();
 }
-
 //print_r($cars);
 ?>
 
@@ -12,17 +21,34 @@ if(!isset($_GET['filter'])){
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compeatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/65416f0144.js" crossorigin="anonymous"></script>
     <title>Home</title>
 </head>
-
 <body>
+<header>
+
+</header>
 <form method="get">
     <input type="text" name="filter">
-    <input type="submit">
+    <select name="sortby">
+        <option value="Nummer" <?php if(isset($_GET["sortby"])=="Nummer" and $_GET["sortby"]=="Nummer") {echo"selected";} ?>>Nummer</option>
+        <option value="Merk" <?php if(isset($_GET["sortby"])=="Merk" and $_GET["sortby"]=="Merk") {echo"selected";} ?>>Merk</option>
+        <option value="Generatie" <?php if(isset($_GET["sortby"])=="Generatie" and $_GET["sortby"]=="Generatie") {echo"selected";} ?>>Generatie</option>
+        <option value="Model"<?php if(isset($_GET["sortby"])=="Model" and $_GET["sortby"]=="Model") {echo"selected";} ?>>Model</option>
+        <option value="Producent"<?php if(isset($_GET["sortby"])=="Producent" and $_GET["sortby"]=="Producent") {echo"selected";} ?>>Producent</option>
+        <option value="Producent"<?php if(isset($_GET["sortby"])=="Producent" and $_GET["sortby"]=="Producent")  {echo"selected";} ?>>Producent</option>
+        <option value="`Huidige locatie`"<?php if(isset($_GET["sortby"])=="`Huidige locatie`" and $_GET["sortby"]=="`Huidige locatie`") {echo"selected";} ?>>Huidige locatie</option>
+        <option value="DoosID"<?php if(isset($_GET["sortby"]) and $_GET["sortby"]=="Doos") {echo"selected";} ?>>Doos</option>
+    </select>
+
+    <select class="fa-solid" name="orderby">
+        <option value="ASC"class="fa-solid fa-arrow-up" <?php if(isset($_GET["orderby"]) and $_GET["orderby"]=="ASC") {echo"selected";} ?>>&darr;</option>
+        <option value="DESC"class="fa-solid fa-arrow-down" <?php if(isset($_GET["orderby"]) and $_GET["orderby"]=="DESC") {echo"selected";} ?>>&uarr;</option>
+    </select>
+    <input type="submit" value="Zoeken">
 </form>
 <div class="flex-container">
     <?php
@@ -41,8 +67,8 @@ if(!isset($_GET['filter'])){
 
         echo "<div class=\"container\">
         <div class=\"img-container\">
-            <img src=http://192.168.1.10/Foto/Auto''s/Opgenomen%20in%20DB/0033-1%20-%20Ferrari%20Testarossa%20(F110)%20(1984)%20-%20Face%20Front.jpg>
-            <img src=http://192.168.1.10/Foto/Auto''s/Opgenomen%20in%20DB/0033-1%20-%20Ferrari%20Testarossa%20(F110)%20(1984)%20-%20Face%20Front.jpg>
+            <img src=>
+            <img src=>
         </div>
         <div class=\"info-container\">";
         echo "<div class='blok1'><h1>Nummer: " . $car["Nummer"] . "</h1></div>";
@@ -131,8 +157,8 @@ if(!isset($_GET['filter'])){
                     break;
             }
         }
-        echo "<div class='blok18'><h1>carosserievariant: " . substr($carosserievariant, 1) . "</h1></div>";
         echo "</div>";
+        echo "<div class='blok18'><h1>carosserievariant: " . substr($carosserievariant, 1) . "</h1></div>";
         echo "<div class='blok13'><h1>Opmerking: " . str_replace(array('<div>', '</div>'), ' ',$car["Opmerkingen"]) . "</h1></div>";
         echo "</div>";
     }
