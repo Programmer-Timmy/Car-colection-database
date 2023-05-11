@@ -1,9 +1,33 @@
 body {
-  background-color: lightblue;
+  background-color: #343334;
+  color: #28232f;
+  font-family: "Roboto Slab", "Times New Roman", serif;
+  font-weight: 500;
+  font-size: 18px;
+
+  h1{
+    //color: #28B0DF;
+    font-weight: 800;
+    //float: left;
+  }
 }
 header{
-  height: 100px;
-  background-color: red;
+  height: 60px;
+  background-color: #28B0DF;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  form {
+    display: flex;
+    padding: 15px 0 15px 0;
+    align-items: stretch;
+    input, select{
+      background-color: #F0EBF0;
+      border: 0px;
+    }
+  }
 }
 .flex-container {
   display: flex;
@@ -13,28 +37,37 @@ header{
 }
 
 .container {
+  border-radius: 25px 5px 25px 5px;
   display: block;
-  width: 475px;
-  background-color: #55d6aa;
+  width: 500px;
+  background-color: rgba(242, 239, 243, 0.92);
   margin: 100px 10px 0 10px;
+  color: #343334;
 
 
   .img-container {
-
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     height: 150px;
+    overflow: hidden;
+    width: 100%;
+    transition: height 1s;
+    &:hover , img:hover{
+      height: 250px;
+    }
 
     img {
-      height: 150px;
-      width: 150px;
+      transition: height 1s;
+      height: 250px;
+      width: 100%;
+      object-fit: cover;
+      resize: none;
+      border-radius: 20px 5px 0 0 !important;
       margin: auto;
     }
   }
   .info-container{
-    font-family: 'Trebuchet MS', sans-serif;
-    font-size: 15px;
     margin-top: 10px;
     line-height: 15px;
     display: flex;
@@ -46,20 +79,10 @@ header{
       //background-color: #333333;
       width: 237.5px;
 
-
-      h1{
+      h1, h2{
         padding: 0 10px 10px 10px;
       }
     }
   }
-  .blok13, .blok18 {
-    font-family: 'Trebuchet MS', sans-serif;
-    font-size: 15px;
-    line-height: 15px;
-
-
-    h1 {
-      padding: 0 10px 10px 10px;
-    }
-  }
 }
+

@@ -25,31 +25,36 @@ if (isset($_GET['filter']) && isset($_GET['sortby']) && isset($_GET['orderby']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://kit.fontawesome.com/65416f0144.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <title>Home</title>
 </head>
 <body>
 <header>
+    <ul>
+        <li>Home</li>
+    </ul>
+    <form method="get">
+        <input type="text" name="filter">
+        <select name="sortby">
+            <option value="Nummer" <?php if(isset($_GET["sortby"])=="Nummer" and $_GET["sortby"]=="Nummer") {echo"selected";} ?>>Nummer</option>
+            <option value="Merk" <?php if(isset($_GET["sortby"])=="Merk" and $_GET["sortby"]=="Merk") {echo"selected";} ?>>Merk</option>
+            <option value="Generatie" <?php if(isset($_GET["sortby"])=="Generatie" and $_GET["sortby"]=="Generatie") {echo"selected";} ?>>Generatie</option>
+            <option value="Model"<?php if(isset($_GET["sortby"])=="Model" and $_GET["sortby"]=="Model") {echo"selected";} ?>>Model</option>
+            <option value="Producent"<?php if(isset($_GET["sortby"])=="Producent" and $_GET["sortby"]=="Producent") {echo"selected";} ?>>Producent</option>
+            <option value="Producent"<?php if(isset($_GET["sortby"])=="Producent" and $_GET["sortby"]=="Producent")  {echo"selected";} ?>>Producent</option>
+            <option value="`Huidige locatie`"<?php if(isset($_GET["sortby"])=="`Huidige locatie`" and $_GET["sortby"]=="`Huidige locatie`") {echo"selected";} ?>>Huidige locatie</option>
+            <option value="DoosID"<?php if(isset($_GET["sortby"]) and $_GET["sortby"]=="Doos") {echo"selected";} ?>>Doos</option>
+        </select>
 
+        <select class="fa-solid" name="orderby">
+            <option value="ASC"class="fa-solid fa-arrow-up" <?php if(isset($_GET["orderby"]) and $_GET["orderby"]=="ASC") {echo"selected";} ?>>&darr;</option>
+            <option value="DESC"class="fa-solid fa-arrow-down" <?php if(isset($_GET["orderby"]) and $_GET["orderby"]=="DESC") {echo"selected";} ?>>&uarr;</option>
+        </select>
+        <input type="submit" value="Zoeken">
+    </form>
 </header>
-<form method="get">
-    <input type="text" name="filter">
-    <select name="sortby">
-        <option value="Nummer" <?php if(isset($_GET["sortby"])=="Nummer" and $_GET["sortby"]=="Nummer") {echo"selected";} ?>>Nummer</option>
-        <option value="Merk" <?php if(isset($_GET["sortby"])=="Merk" and $_GET["sortby"]=="Merk") {echo"selected";} ?>>Merk</option>
-        <option value="Generatie" <?php if(isset($_GET["sortby"])=="Generatie" and $_GET["sortby"]=="Generatie") {echo"selected";} ?>>Generatie</option>
-        <option value="Model"<?php if(isset($_GET["sortby"])=="Model" and $_GET["sortby"]=="Model") {echo"selected";} ?>>Model</option>
-        <option value="Producent"<?php if(isset($_GET["sortby"])=="Producent" and $_GET["sortby"]=="Producent") {echo"selected";} ?>>Producent</option>
-        <option value="Producent"<?php if(isset($_GET["sortby"])=="Producent" and $_GET["sortby"]=="Producent")  {echo"selected";} ?>>Producent</option>
-        <option value="`Huidige locatie`"<?php if(isset($_GET["sortby"])=="`Huidige locatie`" and $_GET["sortby"]=="`Huidige locatie`") {echo"selected";} ?>>Huidige locatie</option>
-        <option value="DoosID"<?php if(isset($_GET["sortby"]) and $_GET["sortby"]=="Doos") {echo"selected";} ?>>Doos</option>
-    </select>
 
-    <select class="fa-solid" name="orderby">
-        <option value="ASC"class="fa-solid fa-arrow-up" <?php if(isset($_GET["orderby"]) and $_GET["orderby"]=="ASC") {echo"selected";} ?>>&darr;</option>
-        <option value="DESC"class="fa-solid fa-arrow-down" <?php if(isset($_GET["orderby"]) and $_GET["orderby"]=="DESC") {echo"selected";} ?>>&uarr;</option>
-    </select>
-    <input type="submit" value="Zoeken">
-</form>
 <div class="flex-container">
     <?php
     foreach ($cars as $car) {
@@ -66,27 +71,30 @@ if (isset($_GET['filter']) && isset($_GET['sortby']) && isset($_GET['orderby']))
         $tempSplit = explode(";", $car["carosserievariant"]);
 
         echo "<div class=\"container\">
-        <div class=\"img-container\">
-            <img src=>
-            <img src=>
+        <div class=\"img-container swiper-container\">
+            <div class=\"swiper-wrapper\">
+                <div class=\"swiper-slide\"><img src=\"https://www.kwaaijongens.nl/blog/wp-content/uploads/2021/02/wordpress-foto-korrelig.png\"></div>
+                <div class=\"swiper-slide\"><img src=\"https://cdn-imgix.headout.com/tour/7064/TOUR-IMAGE/c0e9c490-b7e7-47a6-9c43-3e10e8ddc9cb-4445-dubai-img-worlds-of-adventure-tickets-08.jpeg?auto=format&w=780&h=384&q=90&fit=crop&ar=21%3A9\"></div>
+                <div class=\"swiper-slide\"><img src=\"image3.jpg\"></div>
+            </div>
         </div>
         <div class=\"info-container\">";
-        echo "<div class='blok1'><h1>Nummer: " . $car["Nummer"] . "</h1></div>";
-        echo "<div class='blok2'><h1>Dubbel: " . $dubbel . "</h1></div>";
-        echo "<div class='blok3'><h1>Merk: " . $car["Merk"] . "</h1></div>";
-        echo "<div class='blok4'><h1>Model: " . $car["Model"] . "</h1></div>";
-        echo "<div class='blok5'><h1>Generatie: " . $car["Generatie"] . "</h1></div>";
-        echo "<div class='blok6'><h1>Jaar: " . $car["Jaar"] . "</h1></div>";
-        echo "<div class='blok7'><h1>Kleur: " . $car["Kleur"] . "</h1></div>";
-        echo "<div class='blok8'><h1>Producent: " . $car["Producent"] . "</h1></div>";
-        echo "<div class='blok9'><h1>Model nummer: " . $car["Modelnr"] . "</h1></div>";
-        echo "<div class='blok10'><h1>Schaal: " . $car["Schaal"] . "</h1></div>";
-        echo "<div class='blok11'><h1>Productie jaar: " . $car["prod jaar"] . "</h1></div>";
-        echo "<div class='blok12'><h1>Orgineel: " . $orgineel . "</h1></div>";
-        echo "<div class='blok14'><h1>Opbergverpakking: " . $car["Opbergverpakking"] . "</h1></div>";
-        echo "<div class='blok15'><h1>Doos: " . $car["DoosID"] . "</h1></div>";
-        echo "<div class='blok16'><h1>Staat: " . $car["Staat"] . "</h1></div>";
-        echo "<div class='blok17'><h1>Huidige locatie: " . $car["Locatie"] . "</h1></div>";
+        echo "<div class='blok1'><h1>Nummer: </h1><h2>" . $car["Nummer"] . "</h2></div>";
+        echo "<div class='blok2'><h1>Dubbel: </h1><h2>" . $dubbel . "</h2></div>";
+        echo "<div class='blok3'><h1>Merk: </h1><h2>" . $car["Merk"] . "</h2></div>";
+        echo "<div class='blok4'><h1>Model: </h1><h2>" . $car["Model"] . "</h2></div>";
+        echo "<div class='blok5'><h1>Generatie: </h1><h2>" . $car["Generatie"] . "</h2></div>";
+        echo "<div class='blok6'><h1>Jaar: </h1><h2>" . $car["Jaar"] . "</h2></div>";
+        echo "<div class='blok7'><h1>Kleur: </h1><h2>" . $car["Kleur"] . "</h2></div>";
+        echo "<div class='blok8'><h1>Producent:</h1><h2> " . $car["Producent"] . "</h2></div>";
+        echo "<div class='blok9'><h1>Model nummer: </h1><h2>" . $car["Modelnr"] . "</h2></div>";
+        echo "<div class='blok10'><h1>Schaal: </h1><h2>" . $car["Schaal"] . "</h2></div>";
+        echo "<div class='blok11'><h1>Productie jaar:</h1><h2> " . $car["prod jaar"] . "</h2></div>";
+        echo "<div class='blok12'><h1>Orgineel: </h1><h2>" . $orgineel . "</h2></div>";
+        echo "<div class='blok14'><h1>Opbergverpakking: </h1><h2>" . $car["Opbergverpakking"] . "</h2></div>";
+        echo "<div class='blok15'><h1>Doos: </h1><h2>" . $car["DoosID"] . "</h2></div>";
+        echo "<div class='blok16'><h1>Staat: </h1><h2>" . $car["Staat"] . "</h2></div>";
+        echo "<div class='blok17'><h1>Huidige locatie: </h1><h2>" . $car["Locatie"] . "</h2></div>";
         foreach ($tempSplit as $i) {
             switch ($i) {
                 case 1:
@@ -157,12 +165,21 @@ if (isset($_GET['filter']) && isset($_GET['sortby']) && isset($_GET['orderby']))
                     break;
             }
         }
+
+        echo "<div class='blok18'><h1>carosserievariant: </h1><h2>" . substr($carosserievariant, 1) . "</h2></div>";
+        echo "<div class='blok13'><h1>Opmerking: </h1><h2>" . str_replace(array('<div>', '</div>'), ' ',$car["Opmerkingen"]) . "</h2></div>";
         echo "</div>";
-        echo "<div class='blok18'><h1>carosserievariant: " . substr($carosserievariant, 1) . "</h1></div>";
-        echo "<div class='blok13'><h1>Opmerking: " . str_replace(array('<div>', '</div>'), ' ',$car["Opmerkingen"]) . "</h1></div>";
         echo "</div>";
     }
     ?>
 </div>
 </body>
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        // Optional parameters
+        loop: true,
+
+    });
+</script>
+
 </html>
