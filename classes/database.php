@@ -48,7 +48,6 @@ class Database {
 
                 foreach ($params as $i => $value) {
                     $tmpArray[$i] = &$params[$i];
-                    print_r($params[$i]);
                 }
                 call_user_func_array([$stmt, 'bind_param'], $tmpArray);
             }
