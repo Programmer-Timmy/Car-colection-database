@@ -1,7 +1,10 @@
 body {
-  background-color: gray;
+  background-color: lightblue;
 }
-
+header{
+  height: 100px;
+  background-color: red;
+}
 .flex-container {
   display: flex;
   flex-direction: row;
@@ -13,7 +16,8 @@ body {
   display: block;
   width: 475px;
   background-color: #55d6aa;
-  margin: 50px;
+  margin: 100px 10px 0 10px;
+
 
   .img-container {
 
@@ -48,7 +52,7 @@ body {
       }
     }
   }
-  .blok13 {
+  .blok13, .blok18 {
     font-family: 'Trebuchet MS', sans-serif;
     font-size: 15px;
     line-height: 15px;
